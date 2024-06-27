@@ -1,0 +1,60 @@
+pip install gradio_client
+
+api_name: /update_task_dropdown
+copy
+from gradio_client import Client
+
+client = Client("gokaygokay/Florence-2")
+result = client.predict(
+		choice="Single task",
+		api_name="/update_task_dropdown"
+)
+print(result)
+Accepts 1 parameter:
+choice Literal['Single task', 'Cascased task'] Default: "Single task"
+
+The input value that is provided in the "Task type selector" Radio component.
+
+Returns 1 element
+Literal['Caption', 'Detailed Caption', 'More Detailed Caption', 'Object Detection', 'Dense Region Caption', 'Region Proposal', 'Caption to Phrase Grounding', 'Referring Expression Segmentation', 'Region to Segmentation', 'Open Vocabulary Detection', 'Region to Category', 'Region to Description', 'OCR', 'OCR with Region']
+
+The output value that appears in the "Task Prompt" Dropdown component.
+
+api_name: /process_image
+copy
+from gradio_client import Client, handle_file
+
+client = Client("gokaygokay/Florence-2")
+result = client.predict(
+		image=handle_file('https://raw.githubusercontent.com/gradio-app/gradio/main/test/test_files/bus.png'),
+		task_prompt="Caption",
+		text_input=None,
+		model_id="microsoft/Florence-2-large",
+		api_name="/process_image"
+)
+print(result)
+Accepts 4 parameters:
+image filepath Required
+
+The input value that is provided in the "Input Picture" Image component.
+
+task_prompt Literal['Caption', 'Detailed Caption', 'More Detailed Caption', 'Object Detection', 'Dense Region Caption', 'Region Proposal', 'Caption to Phrase Grounding', 'Referring Expression Segmentation', 'Region to Segmentation', 'Open Vocabulary Detection', 'Region to Category', 'Region to Description', 'OCR', 'OCR with Region'] Default: "Caption"
+
+The input value that is provided in the "Task Prompt" Dropdown component.
+
+text_input str | None Default: None
+
+The input value that is provided in the "Text Input (optional)" Textbox component.
+
+model_id Literal['microsoft/Florence-2-large-ft', 'microsoft/Florence-2-large', 'microsoft/Florence-2-base-ft', 'microsoft/Florence-2-base'] Default: "microsoft/Florence-2-large"
+
+The input value that is provided in the "Model" Dropdown component.
+
+Returns tuple of 2 elements
+[0] str
+
+The output value that appears in the "Output Text" Textbox component.
+
+[1] filepath
+
+The output value that appears in the "Output Image" Image compone
